@@ -2,12 +2,17 @@ import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import { Box, Divider, Typography } from "@mui/material";
 import Head from "next/head";
-import Carousell from "../components/Carousell";
+import Carousell from "../../components/Carousell";
 import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
+import axios from "axios";
 
 export default function Home() {
   const [selected, setSelected] = useState(false);
+
+  axios.get("https://dashboard-tau-ivory.vercel.app/api/checkpoints").then((res) => {
+    console.log(res.data);
+  });
 
   const items = [
     {
