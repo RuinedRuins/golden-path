@@ -11,16 +11,20 @@ export default function Home() {
 
   const handlePrevSlide = (e) => {
     e.preventDefault();
+    console.log(sliderRef);
     if (sliderRef?.current) {
       sliderRef.current.prev();
     }
+    console.log("prev");
   };
 
   const handleNextSlide = (e) => {
     e.preventDefault();
+    console.log(sliderRef);
     if (sliderRef?.current) {
       sliderRef.current.next();
     }
+    console.log("next");
   };
 
   const items = [
@@ -47,7 +51,15 @@ export default function Home() {
         <title>Golden Path</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Box sx={{ mx: 5, height: "100vh" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          mx: 5,
+          height: "100vh",
+        }}
+      >
         {/* app name display, required? */}
         <Typography
           fontWeight={300}
@@ -57,11 +69,11 @@ export default function Home() {
           Golden Path
         </Typography>
         {/* slideshow section */}
-        <Box sx={{ height: "60%" }}>
+        <Box sx={{ height: "70%" }}>
           <Carousell images={items} ref={sliderRef} />
         </Box>
         {/* buttons section */}
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             height: "50px",
@@ -84,7 +96,7 @@ export default function Home() {
             color={"#1A1700"}
             onHoverColor={"#74D2CC"}
           />
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

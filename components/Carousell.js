@@ -1,25 +1,25 @@
-import React, { useRef } from "react";
+import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Box, Button } from "@mui/material";
 import Image from "next/image";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-export default function Carousell({ ref, images: props }) {
-  const sliderRef = useRef(null);
-
+export default React.forwardRef(function Carousell({ images: props }, ref) {
+  console.log(ref);
   return (
     <Carousel
-      ref={sliderRef}
-      fullHeightHover={false} // We want the nav buttons wrapper to only be as big as the button element is
+      ref={ref} // Use the ref that's being passed from the parent component
+      fullHeightHover={false}
       navButtonsWrapperProps={{
-        // Move the buttons to the bottom. Unsetting top here to override default style.
         style: {
+          height: "50px",
           bottom: "0",
           top: "unset",
         },
       }}
       autoPlay={false}
+      sx={{ height: "100%" }}
       NavButton={({ onClick, className, style, next, prev }) => {
         // Other logic
 
@@ -33,9 +33,17 @@ export default function Carousell({ ref, images: props }) {
               backgroundColor: "#68B0AB",
               fontWeight: 600,
               height: "50px",
-              "&:hover": {
-                backgroundColor: "#74D2CC",
+              "&.MuiButton-containedPrimary:hover": {
+                backgroundColor: "#74D2CC", // Apply the background color to the active state on hover
+                opacity: 1,
               },
+              "&.MuiButton-containedPrimary:active": {
+                backgroundColor: "#74D2CC", // Apply the background color to the active state on click
+                opacity: 1,
+              },
+              // "&.MuiButton-containedPrimary": {
+              //   backgroundColor: "#74D2CC", // Apply the background color to the active state
+              // },
             }}
             onClick={onClick}
             className={className}
@@ -52,7 +60,7 @@ export default function Carousell({ ref, images: props }) {
       ))}
     </Carousel>
   );
-}
+});
 
 const Item = ({ src }) => {
   return (
