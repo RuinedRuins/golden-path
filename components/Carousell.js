@@ -1,11 +1,11 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Box, Button, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import Image from "next/image";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-export default function Carousell({ images: props }, ref) {
+export default function Carousell({ images: props }) {
   return (
     <Carousel
       fullHeightHover={false}
@@ -29,8 +29,8 @@ export default function Carousell({ images: props }, ref) {
             className={className}
             style={style}
           >
-            {prev && <ChevronLeftIcon sx={{ transform: "scale(1.5)" }} />}
-            {next && <ChevronRightIcon sx={{ transform: "scale(1.5)" }} />}
+            {prev && <ChevronLeftIcon sx={{ transform: "scale(1.3)" }} />}
+            {next && <ChevronRightIcon sx={{ transform: "scale(1.3)" }} />}
           </IconButton>
         );
       }}

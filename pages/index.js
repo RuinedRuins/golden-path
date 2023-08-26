@@ -26,6 +26,31 @@ export default function Home() {
       src: "https://picsum.photos/id/23/800/300",
     },
   ];
+
+  const accessibilityItems = [
+    {
+      src: "https://picsum.photos/id/129/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/24/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/233/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/299/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/12/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/99/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/2/800/300",
+    },
+  ];
+
   return (
     // create a head
     <>
@@ -87,14 +112,21 @@ export default function Home() {
         </Typography>
         {/* slideshow section */}
         <Box sx={{ height: "55%" }}>
-          <Carousell images={items} />
+          <Carousell images={selected ? items : accessibilityItems} />
         </Box>
-        <Divider sx={{ width: "100%", backgroundColor: "#ffebaa", my: 5 }} />
+        {/* guiding text at the bottom */}
+        {/* <Divider sx={{ width: "100%", backgroundColor: "#ffebaa", my: 5 }} />
         <Box>
           <Typography>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            Explore the content by using the arrow buttons to navigate forwards
+            and backwards, guiding you to your desired destination.
           </Typography>
-        </Box>
+          <br></br>
+          <Typography>
+            Use the toggle button to switch between the standard and accessible
+            versions!
+          </Typography>
+        </Box> */}
       </Box>
     </>
   );
