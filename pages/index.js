@@ -4,8 +4,25 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Box, Typography } from "@mui/material";
 import Head from "next/head";
 import Carousell from "../components/Carousell";
+import { useRef } from "react";
 
 export default function Home() {
+  const sliderRef = useRef(null);
+
+  const handlePrevSlide = (e) => {
+    e.preventDefault();
+    if (sliderRef?.current) {
+      sliderRef.current.prev();
+    }
+  };
+
+  const handleNextSlide = (e) => {
+    e.preventDefault();
+    if (sliderRef?.current) {
+      sliderRef.current.next();
+    }
+  };
+
   const items = [
     {
       src: "https://picsum.photos/id/237/800/300",
@@ -41,7 +58,7 @@ export default function Home() {
         </Typography>
         {/* slideshow section */}
         <Box sx={{ height: "60%" }}>
-          <Carousell images={items} />
+          <Carousell images={items} ref={sliderRef} />
         </Box>
         {/* buttons section */}
         <Box
@@ -52,6 +69,7 @@ export default function Home() {
           }}
         >
           <CustomButton
+            onClick={handlePrevSlide}
             text={"Backward"}
             startIcon={<ChevronLeftIcon />}
             bgColor={"#68B0AB"}
@@ -59,6 +77,7 @@ export default function Home() {
             onHoverColor={"#74D2CC"}
           />
           <CustomButton
+            onClick={handleNextSlide}
             text={"Forward"}
             endIcon={<ChevronRightIcon />}
             bgColor={"#68B0AB"}

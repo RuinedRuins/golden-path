@@ -8,9 +8,11 @@ const CustomButton = ({
   bgColor,
   color,
   onHoverColor,
+  onClick,
 }) => {
   return (
     <Button
+      onClick={onClick}
       variant="contained"
       startIcon={startIcon}
       endIcon={endIcon}
