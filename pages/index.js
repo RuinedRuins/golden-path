@@ -3,8 +3,26 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Box, Typography } from "@mui/material";
 import Head from "next/head";
+import Carousell from "../components/Carousell";
 
 export default function Home() {
+  const items = [
+    {
+      src: "https://picsum.photos/id/237/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/236/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/233/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/200/800/300",
+    },
+    {
+      src: "https://picsum.photos/id/23/800/300",
+    },
+  ];
   return (
     // create a head
     <>
@@ -22,7 +40,9 @@ export default function Home() {
           Golden Path
         </Typography>
         {/* slideshow section */}
-        <Box sx={{ height: 5 / 8 }}>hi</Box>
+        <Box sx={{ height: "60%" }}>
+          <Carousell images={items} />
+        </Box>
         {/* buttons section */}
         <Box
           sx={{
