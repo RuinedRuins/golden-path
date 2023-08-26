@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import Image from "next/image";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -13,7 +13,7 @@ export default React.forwardRef(function Carousell({ images: props }, ref) {
       fullHeightHover={false}
       navButtonsWrapperProps={{
         style: {
-          height: "50px",
+          height: "100px",
           bottom: "0",
           top: "unset",
         },
@@ -24,34 +24,16 @@ export default React.forwardRef(function Carousell({ images: props }, ref) {
         // Other logic
 
         return (
-          <Button
+          <IconButton
             variant="contained"
-            startIcon={prev && <ChevronLeftIcon />}
-            endIcon={next && <ChevronRightIcon />}
-            sx={{
-              color: "#1A1700",
-              backgroundColor: "#68B0AB",
-              fontWeight: 600,
-              height: "50px",
-              "&.MuiButton-containedPrimary:hover": {
-                backgroundColor: "#74D2CC", // Apply the background color to the active state on hover
-                opacity: 1,
-              },
-              "&.MuiButton-containedPrimary:active": {
-                backgroundColor: "#74D2CC", // Apply the background color to the active state on click
-                opacity: 1,
-              },
-              // "&.MuiButton-containedPrimary": {
-              //   backgroundColor: "#74D2CC", // Apply the background color to the active state
-              // },
-            }}
+            classes={{ root: "custom-icon-button" }}
             onClick={onClick}
             className={className}
             style={style}
           >
-            {next && "FORWARD"}
-            {prev && "BACKWARD"}
-          </Button>
+            {prev && <ChevronLeftIcon sx={{ transform: "scale(1.5)" }} />}
+            {next && <ChevronRightIcon sx={{ transform: "scale(1.5)" }} />}
+          </IconButton>
         );
       }}
     >
@@ -64,8 +46,14 @@ export default React.forwardRef(function Carousell({ images: props }, ref) {
 
 const Item = ({ src }) => {
   return (
-    <Box>
-      <Image src={src} width={800} height={300} alt="picture" />
+    <Box sx={{ borderRadius: "20px", overflow: "hidden" }}>
+      <Image
+        objectFit="cover"
+        src={src}
+        width={800}
+        height={300}
+        alt="picture"
+      />
     </Box>
   );
 };

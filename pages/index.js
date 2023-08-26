@@ -1,7 +1,7 @@
 import CustomButton from "../components/Button";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import Head from "next/head";
 import Carousell from "../components/Carousell";
 import { useRef } from "react";
@@ -63,15 +63,22 @@ export default function Home() {
         {/* app name display, required? */}
         <Typography
           fontWeight={300}
-          variant="h3"
-          sx={{ textAlign: "center", fontWeight: 700, py: 2 }}
+          variant="h4"
+          sx={{ textAlign: "left", fontWeight: 700, py: 4 }}
         >
           Golden Path
         </Typography>
         {/* slideshow section */}
-        <Box sx={{ height: "70%" }}>
+        <Box sx={{ height: "55%" }}>
           <Carousell images={items} ref={sliderRef} />
         </Box>
+        <Divider sx={{width: '100%', backgroundColor: '#ffebaa', my: 5}}/>
+        <Box>
+          <Typography>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+          </Typography>
+        </Box>
+
         {/* buttons section */}
         {/* <Box
           sx={{
