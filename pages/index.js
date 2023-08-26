@@ -1,31 +1,13 @@
-import CustomButton from "../components/Button";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
+import AccessibleIcon from "@mui/icons-material/Accessible";
 import { Box, Divider, Typography } from "@mui/material";
 import Head from "next/head";
 import Carousell from "../components/Carousell";
-import { useRef } from "react";
+import { useState } from "react";
+import ToggleButton from "@mui/material/ToggleButton";
 
 export default function Home() {
-  const sliderRef = useRef(null);
-
-  const handlePrevSlide = (e) => {
-    e.preventDefault();
-    console.log(sliderRef);
-    if (sliderRef?.current) {
-      sliderRef.current.prev();
-    }
-    console.log("prev");
-  };
-
-  const handleNextSlide = (e) => {
-    e.preventDefault();
-    console.log(sliderRef);
-    if (sliderRef?.current) {
-      sliderRef.current.next();
-    }
-    console.log("next");
-  };
+  const [selected, setSelected] = useState(false);
 
   const items = [
     {
@@ -51,6 +33,42 @@ export default function Home() {
         <title>Golden Path</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <ToggleButton
+        sx={{
+          position: "absolute",
+          top: "-5px",
+          right: "-5px",
+        }}
+        value="check"
+        selected={selected}
+        onChange={() => {
+          setSelected(!selected);
+        }}
+      >
+        {selected ? (
+          <DirectionsWalkIcon
+            sx={{
+              color: "#1c1a1a",
+              transform: "scale(1.5)",
+              backgroundColor: "#ffebaa",
+              borderBottomLeftRadius: "3px",
+              borderTopLeftRadius: "3px",
+              borderBottomRightRadius: "3px",
+            }}
+          />
+        ) : (
+          <AccessibleIcon
+            sx={{
+              color: "#1c1a1a",
+              transform: "scale(1.5)",
+              backgroundColor: "#ffebaa",
+              borderBottomLeftRadius: "3px",
+              borderTopLeftRadius: "3px",
+              borderBottomRightRadius: "3px",
+            }}
+          />
+        )}
+      </ToggleButton>
       <Box
         sx={{
           display: "flex",
@@ -60,7 +78,6 @@ export default function Home() {
           height: "100vh",
         }}
       >
-        {/* app name display, required? */}
         <Typography
           fontWeight={300}
           variant="h4"
@@ -70,40 +87,14 @@ export default function Home() {
         </Typography>
         {/* slideshow section */}
         <Box sx={{ height: "55%" }}>
-          <Carousell images={items} ref={sliderRef} />
+          <Carousell images={items} />
         </Box>
-        <Divider sx={{width: '100%', backgroundColor: '#ffebaa', my: 5}}/>
+        <Divider sx={{ width: "100%", backgroundColor: "#ffebaa", my: 5 }} />
         <Box>
           <Typography>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
           </Typography>
         </Box>
-
-        {/* buttons section */}
-        {/* <Box
-          sx={{
-            display: "flex",
-            height: "50px",
-            justifyContent: "space-around",
-          }}
-        >
-          <CustomButton
-            onClick={handlePrevSlide}
-            text={"Backward"}
-            startIcon={<ChevronLeftIcon />}
-            bgColor={"#68B0AB"}
-            color={"#1A1700"}
-            onHoverColor={"#74D2CC"}
-          />
-          <CustomButton
-            onClick={handleNextSlide}
-            text={"Forward"}
-            endIcon={<ChevronRightIcon />}
-            bgColor={"#68B0AB"}
-            color={"#1A1700"}
-            onHoverColor={"#74D2CC"}
-          />
-        </Box> */}
       </Box>
     </>
   );

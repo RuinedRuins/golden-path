@@ -5,11 +5,9 @@ import Image from "next/image";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-export default React.forwardRef(function Carousell({ images: props }, ref) {
-  console.log(ref);
+export default function Carousell({ images: props }, ref) {
   return (
     <Carousel
-      ref={ref} // Use the ref that's being passed from the parent component
       fullHeightHover={false}
       navButtonsWrapperProps={{
         style: {
@@ -42,7 +40,7 @@ export default React.forwardRef(function Carousell({ images: props }, ref) {
       ))}
     </Carousel>
   );
-});
+};
 
 const Item = ({ src }) => {
   return (
