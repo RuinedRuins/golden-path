@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import WalkingManProgressBar from "../../components/ProgressBar";
 
 export default function Home() {
+  const [items, setItems] = useState([]);
   const [selected, setSelected] = useState(false);
   const [imageNum, setImageNum] = useState(0);
   // get the query id
@@ -19,29 +20,29 @@ export default function Home() {
   useEffect(() => {
     if (id) {
       console.log(id);
-      axios.get(`https://dashboard-tau-ivory.vercel.app/api/checkpoints/${id}`).then((res) => {
-        console.log(res.data);
-      });
+      axios
+        .get(`https://dashboard-tau-ivory.vercel.app/api/checkpoints/${id}`)
+        .then((res) => {
+          console.log(res.data);
+        });
+      axios
+        .get(
+          `https://dashboard-tau-ivory.vercel.app/api/checkpoints/${id}/path`
+        )
+        .then((res) => {
+          console.log(res.data);
+          // loop data and add to items
+          const newItems = [];
+          for (let i = 0; i < res.data.length; i++) {
+            newItems.push({
+              src: res.data[0].images[i].src,
+            });
+          }
+          setItems(newItems);
+          // loop data and add to accessibilityItems
+        });
     }
   }, [id]);
-
-  const items = [
-    {
-      src: "https://picsum.photos/id/237/800/300",
-    },
-    {
-      src: "https://picsum.photos/id/236/800/300",
-    },
-    {
-      src: "https://picsum.photos/id/233/800/300",
-    },
-    {
-      src: "https://picsum.photos/id/200/800/300",
-    },
-    {
-      src: "https://picsum.photos/id/23/800/300",
-    },
-  ];
 
   const accessibilityItems = [
     {
@@ -128,9 +129,17 @@ export default function Home() {
         </Typography>
         {/* slideshow section */}
         <Box sx={{ height: "55%", mb: 5 }}>
-          <Carousell setImageNum={setImageNum} images={selected ? items : accessibilityItems} />
+          <Carousell
+            setImageNum={setImageNum}
+            images={selected ? items : accessibilityItems}
+          />
         </Box>
-        <WalkingManProgressBar currentSlide={imageNum} totalSlides={selected ? items.length - 1 : accessibilityItems.length - 1} />
+        <WalkingManProgressBar
+          currentSlide={imageNum}
+          totalSlides={
+            selected ? items.length - 1 : accessibilityItems.length - 1
+          }
+        />
         {/* guiding text at the bottom */}
         {/* <Divider sx={{ width: "100%", backgroundColor: "#ffebaa", my: 5 }} />
         <Box>

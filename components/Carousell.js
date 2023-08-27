@@ -31,6 +31,16 @@ export default function Carousell({ imageNum, setImageNum, images: props }) {
         );
         setImageNum(now);
       }}
+      indicatorIconButtonProps={{
+        style: {
+          // pointerEvents: "none", // 1
+        },
+      }}
+      activeIndicatorIconButtonProps={{
+        style: {
+          pointerEvents: "none", // 1
+        },
+      }}
       NavButton={({ onClick, className, style, next, prev }) => {
         // Other logic
 
