@@ -5,7 +5,7 @@ import Image from "next/image";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-export default function Carousell({ images: props }) {
+export default function Carousell({ imageNum, setImageNum, images: props }) {
   return (
     <Carousel
       fullHeightHover={false}
@@ -17,7 +17,20 @@ export default function Carousell({ images: props }) {
         },
       }}
       autoPlay={false}
+      cycleNavigation={false}
       sx={{ height: "100%" }}
+      next={(now, previous) => {
+        console.log(
+          `Next User Callback: Now displaying child${now}. Previously displayed child${previous}`
+        );
+        setImageNum(now);
+      }}
+      prev={(now, previous) => {
+        console.log(
+          `Prev User Callback: Now displaying child${now}. Previously displayed child${previous}`
+        );
+        setImageNum(now);
+      }}
       NavButton={({ onClick, className, style, next, prev }) => {
         // Other logic
 
@@ -40,7 +53,7 @@ export default function Carousell({ images: props }) {
       ))}
     </Carousel>
   );
-};
+}
 
 const Item = ({ src }) => {
   return (

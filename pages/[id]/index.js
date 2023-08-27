@@ -3,16 +3,27 @@ import AccessibleIcon from "@mui/icons-material/Accessible";
 import { Box, Divider, Typography } from "@mui/material";
 import Head from "next/head";
 import Carousell from "../../components/Carousell";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import axios from "axios";
+import { useRouter } from "next/router";
+import WalkingManProgressBar from "../../components/ProgressBar";
 
 export default function Home() {
   const [selected, setSelected] = useState(false);
+  const [imageNum, setImageNum] = useState(0);
+  // get the query id
+  const router = useRouter();
+  const { id } = router.query;
 
-  axios.get("https://dashboard-tau-ivory.vercel.app/api/checkpoints").then((res) => {
-    console.log(res.data);
-  });
+  useEffect(() => {
+    if (id) {
+      console.log(id);
+      axios.get(`https://dashboard-tau-ivory.vercel.app/api/checkpoints/${id}`).then((res) => {
+        console.log(res.data);
+      });
+    }
+  }, [id]);
 
   const items = [
     {
@@ -116,9 +127,10 @@ export default function Home() {
           Golden Path
         </Typography>
         {/* slideshow section */}
-        <Box sx={{ height: "55%" }}>
-          <Carousell images={selected ? items : accessibilityItems} />
+        <Box sx={{ height: "55%", mb: 5 }}>
+          <Carousell setImageNum={setImageNum} images={selected ? items : accessibilityItems} />
         </Box>
+        <WalkingManProgressBar currentSlide={imageNum} totalSlides={selected ? items.length - 1 : accessibilityItems.length - 1} />
         {/* guiding text at the bottom */}
         {/* <Divider sx={{ width: "100%", backgroundColor: "#ffebaa", my: 5 }} />
         <Box>
